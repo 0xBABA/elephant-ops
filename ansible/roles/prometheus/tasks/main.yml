@@ -1,0 +1,23 @@
+---
+- name: install prometheus on monitoring service ec2 instance
+  include_tasks: install_prometheus_service.yml
+  when: inventory_hostname in lookup('inventory_hostnames', 'monitoring_true')
+  tags:
+    - include_prometheus_role
+    - install_prometheus_service
+    - configure_prometheus
+
+- name: install grafana on monitoring service ec2 instance
+  include_tasks: install_grafana_service.yml
+  when: inventory_hostname in lookup('inventory_hostnames', 'monitoring_true')
+  tags:
+    - include_prometheus_role
+    - install_grafana_service
+    - configure_grafana
+
+- name: install kube-state-metrics and prometheus on eks cluster
+  include_tasks: deploy_monitoring_eks.yml
+  when: inventory_hostname in lookup('inventory_hostnames', 'bootstrap_server_true')
+  tags:
+    - include_prometheus_role
+    - deploy_monitoring_eks

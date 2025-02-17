@@ -1,0 +1,16 @@
+---
+- name: install consul on ec2 instances
+  include_tasks: install_consul_services.yml
+  when: inventory_hostname in lookup('inventory_hostnames', 'service_instance_true:bootstrap_server_true:bastion_host_true')
+  tags:
+    - include_consul_role
+    - install_consul_services
+    - configure_consul
+
+- name: install consul on eks_cluster
+  include_tasks: install_consul_eks.yml
+  when: inventory_hostname in groups.bootstrap_server_true
+  tags:
+    - include_consul_role
+    - install_consul_eks
+    - configure_consul

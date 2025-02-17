@@ -1,0 +1,30 @@
+---
+plugin: aws_ec2
+regions:
+  - us-east-1
+filters:
+  tag:purpose:
+    - project
+  instance-state-name: running
+hostnames:
+  - network-interface.association.public-ip
+  - network-interface.addresses.private-ip-address
+keyed_groups:
+  - prefix: bastion_host
+    key: tags['bastion_host']
+  - prefix: service_instance
+    key: tags['is_service_instance']
+  - prefix: consul_server
+    key: tags['consul_server']
+  - prefix: jenkins_server
+    key: tags['jenkins_server']
+  - prefix: jenkins_agent
+    key: tags['jenkins_agent']
+  - prefix: k8s_worker
+    key: tags['k8s']
+  - prefix: monitoring
+    key: tags['is_prometheus']
+  - prefix: elk_server
+    key: tags['elk_server']
+  - prefix: bootstrap_server
+    key: tags['bootstrap_server']

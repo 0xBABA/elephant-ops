@@ -1,0 +1,14 @@
+---
+- name: install node_exporter on service instances
+  include_tasks: install_node_exporter_services.yml
+  when: inventory_hostname in lookup('inventory_hostnames', 'service_instance_true')
+  tags:
+    - include_node_exporter_role
+    - install_ne_services
+
+- name: install node_exporter on eks eks_cluster
+  include_tasks: deploy_node_exporter_eks.yml
+  when: inventory_hostname in lookup('inventory_hostnames', 'bootstrap_server_true')
+  tags:
+    - include_node_exporter_role
+    - deploy_ne_eks
