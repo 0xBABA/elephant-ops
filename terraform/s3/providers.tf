@@ -1,9 +1,9 @@
 terraform {
-  required_version = "1.0.11"
+  required_version = "1.10.5"
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 3.63"
+      version = "~> 5.87.0"
     }
   }
 }
@@ -13,9 +13,9 @@ provider "aws" {
 
   default_tags {
     tags = {
-      owner   = "yoad"
-      purpose = "mid-project"
-      context = "opsschool"
+      owner   = "ylanger"
+      purpose = "elephant-ops"
+      context = "side-proj"
     }
   }
 }

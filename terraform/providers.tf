@@ -1,10 +1,9 @@
 terraform {
-  required_version = "1.0.11"
+  required_version = "1.10.5"
   required_providers {
     aws = {
-      source = "hashicorp/aws"
-      # version = "~> 3.63"
-      version = "~> 3.72.0"
+      source  = "hashicorp/aws"
+      version = "~> 5.87.0"
     }
     kubernetes = {
       source  = "hashicorp/kubernetes"
@@ -28,9 +27,12 @@ terraform {
     }
   }
   backend "s3" {
-    bucket = "yoad-opsschool-mid-project-state"
-    key    = "mid_project_state/mid_proj.tfstate"
-    region = "us-east-1"
+    bucket         = "yoad-opsschool-elephantops-tfstate"
+    key            = "state/elephantops.tfstate"
+    region         = "us-east-1"
+    encrypt        = true
+    kms_key_id     = "alias/eops_s3bucket_key_alias"
+    dynamodb_table = "elephantops_tf_remote_state_table"
   }
 }
 
@@ -43,8 +45,7 @@ provider "aws" {
   default_tags {
     tags = {
       owner   = "yoad"
-      purpose = "project"
-      context = "opsschool"
+      project = "elephantops"
     }
   }
 }
