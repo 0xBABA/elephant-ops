@@ -7,19 +7,19 @@ terraform {
     }
     kubernetes = {
       source  = "hashicorp/kubernetes"
-      version = ">=2.7.1"
+      version = "~>2.36.0"
     }
     random = {
       source  = "hashicorp/random"
-      version = "~> 3.1.0"
+      version = "~> 3.7.1"
     }
     local = {
       source  = "hashicorp/local"
-      version = "~> 2.1.0"
+      version = "~> 2.5.2"
     }
     null = {
       source  = "hashicorp/null"
-      version = "~> 3.1.0"
+      version = "~> 3.2.3"
     }
     template = {
       source  = "hashicorp/template"
@@ -32,7 +32,7 @@ terraform {
     region         = "us-east-1"
     encrypt        = true
     kms_key_id     = "alias/eops_s3bucket_key_alias"
-    dynamodb_table = "elephantops_tf_remote_state_table"
+    dynamodb_table = "terraform-state"
   }
 }
 
